@@ -1,7 +1,6 @@
 import React from "react";
 import {
   AppBar,
-  Box,
   Button,
   Card,
   CardActions,
@@ -45,19 +44,21 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const topBar = props =>
+  <AppBar position="relative">
+  <Toolbar>
+    <BrushIcon className={props.classes.icon}/>
+    <Typography variant="h6" color="inherit" noWrap>
+      {siteTitle}
+    </Typography>
+  </Toolbar>
+</AppBar>;
+
 function App() {
   const classes = useStyles();
-
   return (
     <React.Fragment>
-      <AppBar position="relative">
-        <Toolbar>
-          <BrushIcon className={classes.icon}/>
-          <Typography variant="h6" color="inherit" noWrap>
-            {siteTitle}
-          </Typography>
-        </Toolbar>
-      </AppBar>
+      <topBar classes={classes}/>
       <main>
         {/* Title */}
         <div className={classes.heroContent}>

@@ -1,24 +1,32 @@
 {
   "compilerOptions": {
     "target": "es5",
+    // >> recommended by material-ui
     "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
+      "DOM",
+      "ESNext"
     ],
+    "noImplicitThis": true,
+    // >> relaxed from the material-ui recommendations, or too many warnings...
+    "noImplicitAny": false,
+    "strictNullChecks": false,
+    // >> required by react
     "allowJs": true,
     "skipLibCheck": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "strict": true,
     "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true,
-    "module": "esnext",
-    "moduleResolution": "node",
+    // >> others, inherited over time
+    // implies the following flag
+    "esModuleInterop": true,
+    // import React from non-index files
+    "allowSyntheticDefaultImports": true,
+    // load of JSON files
     "resolveJsonModule": true,
+    "strict": true,
+    "module": "ESNext",
+    "moduleResolution": "node",
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react"
   },
   "include": [
     "src"
