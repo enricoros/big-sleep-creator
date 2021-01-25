@@ -9,6 +9,21 @@ import torch
 # default options, overridable from the command line
 default_http_address = '127.0.0.1'
 default_http_port = 5000
+default_big_sleep_hyper_params = {
+    'text': "a bp",
+    'lr': .07,
+    'image_size': 512,
+    'gradient_accumulate_every': 4,
+    'epochs': 20,
+    'iterations': 1050,
+    'save_every': 50,
+    'overwrite': False,
+    'save_progress': False,
+    'bilinear': False,
+    'open_folder': True,
+    'seed': 0,
+    'torch_deterministic': False,
+}
 
 
 def initial_test():
