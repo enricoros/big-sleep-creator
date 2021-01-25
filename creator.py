@@ -34,16 +34,18 @@ def initial_test():
 
 
 # Main()
-def run_app(http_host=default_http_address, http_port=default_http_port):
+def run_app(http_host=default_http_address, http_port=default_http_port, skip_test=False):
     # configure Flask for serving
     print(f'# Starting HTTP endpoint on {http_host}:{http_port}')
-    app = Flask(__name__, template_folder='web')
+    app = Flask(__name__, template_folder='static-site')
     app.logger.setLevel(20)
     socket_io = SocketIO(app, logger=True, engineio_logger=True, cors_allowed_origins='*')
+    print(f' - socket.io in async mode: {socket_io.async_mode}, {socket_io.server_options}')
     print()
 
     # test out app functionality at start
-    # initial_test()
+    if not skip_test:
+        initial_test()
 
     @app.route('/')
     def index():
@@ -64,7 +66,7 @@ def run_app(http_host=default_http_address, http_port=default_http_port):
     @socket_io.on('connect')
     def test_connect():
         print('Client connected')
-        emit('my response', {'data': 'Connected'})
+        emit('you are connected', {'data': 'Connected'}, broadcast=False)
 
     @socket_io.on('disconnect')
     def test_disconnect():
@@ -74,5 +76,7 @@ def run_app(http_host=default_http_address, http_port=default_http_port):
     socket_io.run(app, host=http_host, port=http_port)
 
 
+# Main
+assert torch.cuda.is_available(), 'CUDA must be available in order to use Deep Daze'
 if __name__ == '__main__':
     fire.Fire(run_app)
