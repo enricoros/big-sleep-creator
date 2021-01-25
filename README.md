@@ -35,7 +35,7 @@ For now this has been tested and verified ont the following configurations:
 
 | OS | GPU Config | PyTorch | Working | 
 | --- | --- | --- | --- |
-| Windows 10 | CUDA 11.2 + cuDNN 11.1 | 1.7.1 (CUDA 11.0) | Yes |
+| Windows 10 | CUDA 11.0 + cuDNN 11.0 | 1.7.1 (CUDA 11.0) | Yes |
 
 ### Big-sleep UI
 This 'React' APP can be built and served by any web server, and will use
