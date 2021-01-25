@@ -3,6 +3,7 @@ torch>=1.7.1
 
 # dependencies installed for reals by this file
 big-sleep==0.3.6
+eventlet~=0.30.0
 flask-socketio~=5.0.1
 fire~=0.4.0
 Flask~=1.1.2

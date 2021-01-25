@@ -1,12 +1,14 @@
 from flask import Flask, render_template
 from flask_socketio import SocketIO, emit
-from big_sleep import Imagine
 import fire
+
+# focused imports
+from big_sleep import Imagine
 import torch
 
 # default options, overridable from the command line
 default_http_address = '127.0.0.1'
-default_http_port = 1337
+default_http_port = 5000
 
 
 def initial_test():
@@ -34,10 +36,10 @@ def initial_test():
 # Main()
 def run_app(http_host=default_http_address, http_port=default_http_port):
     # configure Flask for serving
-    print('# Starting HTTP endpoint on ' + http_host + ':' + str(http_port))
-    app = Flask(__name__)
+    print(f'# Starting HTTP endpoint on {http_host}:{http_port}')
+    app = Flask(__name__, template_folder='web')
     app.logger.setLevel(20)
-    socket_io = SocketIO(app)
+    socket_io = SocketIO(app, logger=True, engineio_logger=True, cors_allowed_origins='*')
     print()
 
     # test out app functionality at start
@@ -47,9 +49,14 @@ def run_app(http_host=default_http_address, http_port=default_http_port):
     def index():
         return render_template('index.html')
 
-    @socket_io.on('my event')
-    def handle_my_custom_event(json):
+    @socket_io.on('json')
+    def handle_my_json_event(json):
         print('received json: ' + str(json))
+
+    @socket_io.on('my_event')
+    def handle_my_message_event(data):
+        print('received message: ' + str(data))
+        emit('my_response', {'data': f'{data}'})
 
     @socket_io.on('connect')
     def test_connect():
