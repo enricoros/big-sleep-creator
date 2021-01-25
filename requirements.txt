@@ -1,5 +1,8 @@
 # this is to be provided by PyTorch - use the official install mechanism from https://pytorch.org/get-started/locally/
 torch>=1.7.1
+
 # dependencies installed for reals by this file
 big-sleep==0.3.6
-flask-socketio==5.0.1
+flask-socketio~=5.0.1
+fire~=0.4.0
+Flask~=1.1.2
