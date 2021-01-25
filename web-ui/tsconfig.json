@@ -14,19 +14,22 @@
     "allowJs": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
     // >> others, inherited over time
     // implies the following flag
     "esModuleInterop": true,
     // import React from non-index files
     "allowSyntheticDefaultImports": true,
-    // load of JSON files
+    // Modules
     "resolveJsonModule": true,
     "strict": true,
     "module": "ESNext",
     "moduleResolution": "node",
     "isolatedModules": true,
+    // do not create JS files
     "noEmit": true,
-    "jsx": "react"
+    // JSX style
+    "jsx": "react-jsx"
   },
   "include": [
     "src"
