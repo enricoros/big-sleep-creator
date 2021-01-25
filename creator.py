@@ -53,10 +53,13 @@ def run_app(http_host=default_http_address, http_port=default_http_port):
     def handle_my_json_event(json):
         print('received json: ' + str(json))
 
+    @socket_io.on('my_ping')
+    def handle_my_message_event():
+        emit('my_pong')
+
     @socket_io.on('my_event')
     def handle_my_message_event(data):
-        print('received message: ' + str(data))
-        emit('my_response', {'data': f'{data}'})
+        emit('echo', data)
 
     @socket_io.on('connect')
     def test_connect():
