@@ -13,15 +13,15 @@ import {
   makeStyles,
 } from "@material-ui/core";
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
-import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilled";
-import PauseCircleFilledIcon from "@material-ui/icons/PauseCircleFilled";
+import PauseIcon from '@material-ui/icons/Pause';
 import ClearIcon from "@material-ui/icons/Clear";
+import NightsStayIcon from '@material-ui/icons/NightsStay';
 
 // CSS for these components
 const useStyles = makeStyles((theme) => ({
   experimentsGrid: {
-    paddingTop: theme.spacing(4),
-    paddingBottom: theme.spacing(8),
+    paddingTop: theme.spacing(2),
+    paddingBottom: theme.spacing(4),
     // boxShadow: '0px 8px 20px -9px #0000009c',
   },
   experimentImage: {
@@ -37,82 +37,104 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-// TEMP - HACK
-export const ImageURLs = [
-  'https://source.unsplash.com/random',
-  'https://user-images.githubusercontent.com/32999/105486415-48ede500-5c63-11eb-81ff-ce976abda2ef.png',
-  'https://github.com/lucidrains/big-sleep/raw/main/samples/artificial_intelligence.png',
-]
-
-let imageIdx = 0;
-
-function DreamCard(props) {
-  const idx = imageIdx++ % ImageURLs.length;
-  const imageUrl = ImageURLs[idx];
-  const imageTitle = 'test1';
-  return <Card className={props.classes.experiment}>
-    <CardMedia className={props.classes.experimentImage} image={imageUrl} title={imageTitle}>
+function DreamCard({classes, idx, title, image}) {
+  return <Card className={classes.experiment}>
+    <CardMedia className={classes.experimentImage} image={image} title={title}>
       <Box display="flex" flexDirection="row">
         <Box flexGrow={1}/>
-        <Box style={{backgroundColor: '#000A'}}>
-          {idx === 2 && <IconButton size="medium">
-            <PlayCircleFilledIcon fontSize="large" style={{color: 'lightgreen'}}/>
+        <IconButton size="small">
+          <ClearIcon fontSize="large" style={{color: 'darkred'}}/>
+        </IconButton>
+        <Box style={{backgroundColor: '#0008'}}>
+          {idx === 0 && <IconButton size="small">
+            <AddCircleOutlineIcon fontSize="large" style={{color: 'lightgreen'}}/>
           </IconButton>}
-          {idx === 1 && <IconButton size="medium">
-            <PauseCircleFilledIcon fontSize="large" color="secondary"/>
-          </IconButton>}
-          {idx === 1 && <IconButton size="medium" disabled={true}>
-            {/*<StopIcon fontSize="large" color="error"/>*/}
-            <ClearIcon fontSize="large" style={{color: 'lightpink'}}/>
+          {idx === 1 && <IconButton size="small">
+            <PauseIcon fontSize="large" style={{color: 'white'}}/>
           </IconButton>}
         </Box>
       </Box>
     </CardMedia>
-    <CardContent className={props.classes.experimentContent}>
-      <Typography gutterBottom variant="body1">
+    <CardContent className={classes.experimentContent}>
+      <Typography gutterBottom variant="body2">
         Generated on {(new Date()).toLocaleString()}.
       </Typography>
     </CardContent>
     <CardActions>
-      <Box display="flex" flexDirection="row">
-        <Button size="small" color="primary">View</Button>
-        <Button size="small" color="primary">Save</Button>
-        <Button size="small" color="primary">Hyper</Button>
-        <Button size="small" color="primary">Latent</Button>
-      </Box>
+      <Button size="small" color="primary">View</Button>
+      <Button size="small" color="primary">Save</Button>
+      <Button size="small" color="primary">Hyper</Button>
+      <Button size="small" color="primary">Latent</Button>
+      <Button size="small" color="primary"><ClearIcon/></Button>
     </CardActions>
   </Card>;
 }
 
+interface DreamCardType {
+  text: string,
+  image: string,
+}
+
+const TEMP_DREAMS: DreamCardType[] = [
+  {
+    text: 'a puppy with blue eyes',
+    image: 'https://user-images.githubusercontent.com/32999/105486415-48ede500-5c63-11eb-81ff-ce976abda2ef.png',
+  },
+  {
+    text: 'a puppy with blue eyes',
+    image: 'https://user-images.githubusercontent.com/32999/105486415-48ede500-5c63-11eb-81ff-ce976abda2ef.png',
+  },
+  {text: 'artificial intelligence', image: 'https://github.com/lucidrains/big-sleep/raw/main/samples/artificial_intelligence.png',},
+  {text: 'stock photos', image: 'https://source.unsplash.com/random',},
+  {text: 'stock photos', image: 'https://source.unsplash.com/random',},
+  {text: 'stock photos', image: 'https://source.unsplash.com/random',},
+  {text: 'stock photos', image: 'https://source.unsplash.com/random',},
+  {text: 'stock photos', image: 'https://source.unsplash.com/random',},
+];
+
 export function Dreams() {
   const classes = useStyles();
+
+  // @ts-ignore
+  const dreamGroups = [...new Set(TEMP_DREAMS.map(d => d.text))];
+
   return <React.Fragment>
     <Container maxWidth="xl">
       <Typography variant={"h5"} component={"h5"} style={{paddingBottom: '1rem'}}>
         Dreams in progress
       </Typography>
     </Container>
-    <Container className={classes.experimentsGrid} maxWidth="xl" style={{backgroundColor: 'aliceblue'}}>
-      <Box display="flex" flexDirection="row" alignItems="center">
-        <Box flexGrow={1} >
-          <Typography variant="h6">
-            « a puppy with blue eyes »
-          </Typography>
+    {dreamGroups.map((dreamGroupText, groupIdx) =>
+      <Container key={`dream-group-${dreamGroupText}`} className={classes.experimentsGrid}
+                 maxWidth="xl" style={{backgroundColor: (groupIdx % 2) === 0 ? 'aliceblue' : '#fafcff'}}>
+        {/* Group Header */}
+        <Box display="flex" flexDirection="row" alignItems="center">
+          <NightsStayIcon color="primary"/>
+          <Box flexGrow={1}>
+            <Typography variant="body1">
+              <span style={{color: '#3B88C3'}}>«</span> {dreamGroupText} <span style={{color: '#3B88C3'}}>»</span>
+            </Typography>
+          </Box>
+          <Button color="primary" size="large" style={{paddingLeft: '1rem', paddingRight: '1rem'}}
+                  onClick={() => console.log('Dreams.dreamMore()')}>
+            Forget dreams&nbsp;
+            <ClearIcon style={{color: 'darkred'}}/>
+          </Button>
+          <Button color="primary" size="large" style={{paddingLeft: '1rem', paddingRight: '1rem'}}
+                  onClick={() => console.log('Dreams.dreamMore()')}>
+            Dream more of this&nbsp;
+            <AddCircleOutlineIcon style={{color: 'green'}}/>
+          </Button>
         </Box>
-        <Button size="large" style={{paddingLeft: '24px', paddingRight: '24px'}}
-                onClick={() => console.log('Dreams.dreamMore()')}>
-          Dream more of this&nbsp;
-          <AddCircleOutlineIcon style={{color: 'green'}}/>
-        </Button>
-      </Box>
-      <Grid container spacing={4}>
-        <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
-          <DreamCard classes={classes}/>
+        {/* Group Dreams */}
+        <Grid container spacing={2}>
+          {TEMP_DREAMS.filter(d => d.text === dreamGroupText).map((d, idx) =>
+            <Grid key={`dream-${idx}`} item xs={12} sm={4} md={3} lg={2} xl={2}>
+              <DreamCard classes={classes} idx={idx} title={d.text} image={d.image}/>
+            </Grid>
+          )}
         </Grid>
-        <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
-          <DreamCard classes={classes}/>
-        </Grid>
-      </Grid>
-    </Container>
+      </Container>
+    )}
   </React.Fragment>;
 }

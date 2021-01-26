@@ -136,10 +136,10 @@ export function TopBar() {
                          value={settingsPort} onChange={e => setSettingsPort(e.target.value)}/>
             </Box>
             <Box display="flex" flexDirection="row" alignItems="center" justifyContent="flex-end">
-              <Button size="large" onClick={() => connector.disconnect()}>
+              <Button size="large" color="primary" onClick={() => connector.disconnect()}>
                 Disconnect
               </Button>
-              <Button size="large" disabled={settingsHost.length < 3 || settingsPort.length < 2}
+              <Button size="large" color="primary" disabled={settingsHost.length < 3 || settingsPort.length < 2}
                       onClick={() => connector.tryConnect(settingsHost, String(settingsPort))}>
                 Connect
               </Button>
@@ -152,7 +152,7 @@ export function TopBar() {
               None yet
             </Box>
             <Box display="flex" flexDirection="row" alignItems="center" justifyContent="flex-end">
-              <Button disabled={true}>
+              <Button color="primary" disabled={true}>
                 Apply
               </Button>
             </Box>

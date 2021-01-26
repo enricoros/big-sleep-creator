@@ -102,11 +102,11 @@ export function NewDreamConfig() {
         </FormControl>
 
         {/* Dream! */}
-        <Button size="large" disabled={!ready} style={{paddingLeft: '24px', paddingRight: '24px'}}
-                onClick={() => nextDreams()}>
+        <IconButton color="primary" size="medium" disabled={!ready} style={{paddingLeft: '24px', paddingRight: '24px'}}
+                    onClick={() => nextDreams()}>
           {dreamReps > 1 ? 'Dreams' : 'Dream'}&nbsp;
-          <PlayCircleFilledIcon style={{color: !ready ? 'lightgray' : 'green'}}/>
-        </Button>
+          <PlayCircleFilledIcon fontSize="large" style={{color: !ready ? 'lightgray' : 'green'}}/>
+        </IconButton>
       </Box>
 
       {/* Hyper parameters show/edit box */}
