@@ -56,9 +56,9 @@ export function TopBar() {
     if (!cs.errorMessage) {
       if (cs.connected) {
         const ss: ServerStatus = _ss || {} as ServerStatus;
-        statusElement = <React.Fragment>
+        statusElement = <Box display="flex" flexDirection="row" alignItems="center">
           {ss.busy && <CircularProgress color="secondary" size="1.8rem" onClick={() => connector.sendForceClearBusy()}/>}
-          <Typography variant="h6" color="inherit" style={{color: ss.busy ? 'darkred' : 'lightgreen', margin: '12px'}}>
+          <Typography variant="h6" style={{color: ss.busy ? 'darkred' : 'lightgreen', margin: '12px'}}>
             {ss.busy ? 'busy' : 'ready'}
           </Typography>
           <Tooltip title={
@@ -70,7 +70,7 @@ export function TopBar() {
             </Typography>}>
             <InfoOutlinedIcon fontSize="small"/>
           </Tooltip>
-        </React.Fragment>;
+        </Box>;
       } else {
         statusElement = <Box display="flex" flexDirection="row" alignItems="center">
           <Typography variant="h6" noWrap>
