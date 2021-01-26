@@ -133,7 +133,7 @@ export function NewDreamConfig() {
       </Paper>}
 
       <Typography variant="h6" align="center" color="textSecondary" paragraph>
-        This is a prototype{/* of human-in-the-loop art generation*/}.
+        This is a prototype under development{/* of human-in-the-loop art generation*/}.
       </Typography>
     </Container>
   </div>;

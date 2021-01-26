@@ -19,27 +19,27 @@ import NightsStayIcon from '@material-ui/icons/NightsStay';
 
 // CSS for these components
 const useStyles = makeStyles((theme) => ({
-  experimentsGrid: {
+  dreamsGroup: {
     paddingTop: theme.spacing(2),
     paddingBottom: theme.spacing(4),
     // boxShadow: '0px 8px 20px -9px #0000009c',
   },
-  experimentImage: {
+  dreamImage: {
     paddingTop: '56.25%', // 16:9
   },
-  experiment: {
+  dreamCard: {
     height: '100%',
     display: 'flex',
     flexDirection: 'column',
   },
-  experimentContent: {
+  dreamCardContent: {
     flexGrow: 1,
   },
 }));
 
 function DreamCard({classes, idx, title, image}) {
-  return <Card className={classes.experiment}>
-    <CardMedia className={classes.experimentImage} image={image} title={title}>
+  return <Card className={classes.dreamCard}>
+    <CardMedia className={classes.dreamImage} image={image} title={title}>
       <Box display="flex" flexDirection="row">
         <Box flexGrow={1}/>
         <IconButton size="small">
@@ -55,7 +55,7 @@ function DreamCard({classes, idx, title, image}) {
         </Box>
       </Box>
     </CardMedia>
-    <CardContent className={classes.experimentContent}>
+    <CardContent className={classes.dreamCardContent}>
       <Typography gutterBottom variant="body2">
         Generated on {(new Date()).toLocaleString()}.
       </Typography>
@@ -100,12 +100,12 @@ export function Dreams() {
 
   return <React.Fragment>
     <Container maxWidth="xl">
-      <Typography variant={"h5"} component={"h5"} style={{paddingBottom: '1rem'}}>
+      <Typography variant={"h5"} component={"h5"} style={{paddingBottom: '1rem'}} align="center">
         Dreams in progress
       </Typography>
     </Container>
     {dreamGroups.map((dreamGroupText, groupIdx) =>
-      <Container key={`dream-group-${dreamGroupText}`} className={classes.experimentsGrid}
+      <Container key={`dream-group-${dreamGroupText}`} className={classes.dreamsGroup}
                  maxWidth="xl" style={{backgroundColor: (groupIdx % 2) === 0 ? 'aliceblue' : '#fafcff'}}>
         {/* Group Header */}
         <Box display="flex" flexDirection="row" alignItems="center">
