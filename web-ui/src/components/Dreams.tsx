@@ -20,8 +20,8 @@ import NightsStayIcon from '@material-ui/icons/NightsStay';
 // CSS for these components
 const useStyles = makeStyles((theme) => ({
   dreamsGroup: {
-    paddingTop: theme.spacing(2),
-    paddingBottom: theme.spacing(4),
+    paddingTop: theme.spacing(1),
+    paddingBottom: theme.spacing(3),
     // boxShadow: '0px 8px 20px -9px #0000009c',
   },
   dreamImage: {
@@ -42,15 +42,15 @@ function DreamCard({classes, idx, title, image}) {
     <CardMedia className={classes.dreamImage} image={image} title={title}>
       <Box display="flex" flexDirection="row">
         <Box flexGrow={1}/>
-        <IconButton size="small">
-          <ClearIcon fontSize="large" style={{color: 'darkred'}}/>
-        </IconButton>
-        <Box style={{backgroundColor: '#0008'}}>
+        <Box style={{backgroundColor: '#FFFD'}}>
+          <IconButton size="small">
+            <ClearIcon fontSize="large" style={{color: 'darkred'}}/>
+          </IconButton>
           {idx === 0 && <IconButton size="small">
-            <AddCircleOutlineIcon fontSize="large" style={{color: 'lightgreen'}}/>
+            <AddCircleOutlineIcon fontSize="large" style={{color: 'green'}}/>
           </IconButton>}
           {idx === 1 && <IconButton size="small">
-            <PauseIcon fontSize="large" style={{color: 'white'}}/>
+            <PauseIcon fontSize="large" color="primary"/>
           </IconButton>}
         </Box>
       </Box>
@@ -60,7 +60,7 @@ function DreamCard({classes, idx, title, image}) {
         Generated on {(new Date()).toLocaleString()}.
       </Typography>
     </CardContent>
-    <CardActions>
+    <CardActions disableSpacing={true}>
       <Button size="small" color="primary">View</Button>
       <Button size="small" color="primary">Save</Button>
       <Button size="small" color="primary">Hyper</Button>
