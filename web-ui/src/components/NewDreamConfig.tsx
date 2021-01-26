@@ -104,7 +104,7 @@ export function NewDreamConfig() {
         {/* Dream! */}
         <Button size="large" disabled={!ready} style={{paddingLeft: '24px', paddingRight: '24px'}}
                 onClick={() => nextDreams()}>
-          Dream&nbsp;
+          {dreamReps > 1 ? 'Dreams' : 'Dream'}&nbsp;
           <PlayCircleFilledIcon style={{color: !ready ? 'lightgray' : 'green'}}/>
         </Button>
       </Box>
